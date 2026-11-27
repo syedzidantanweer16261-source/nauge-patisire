@@ -70,9 +70,9 @@ const LAYERS: Layer[] = [
   { name: "raspberry-a", left: 3, top: 16, width: 15, rotate: -14, depth: 30, z: 30, enter: "burst", delay: 1.15, float: 7 },
   { name: "raspberry-b", left: 80, top: 68, width: 13, rotate: 20, depth: 40, z: 30, enter: "burst", delay: 1.25, float: 8.5 },
   { name: "raspberry-c", left: 26, top: 86, width: 10, rotate: -30, depth: 58, z: 40, blur: 2.5, enter: "burst", delay: 1.35, float: 6.5 },
-  { name: "flake-a", left: 66, top: 22, width: 8, rotate: 35, depth: 26, z: 30, enter: "burst", delay: 1.1, float: 9 },
-  { name: "flake-b", left: 16, top: 70, width: 7, rotate: -50, depth: 46, z: 30, enter: "burst", delay: 1.2, float: 7.5 },
-  { name: "flake-c", left: 90, top: 42, width: 6, rotate: 70, depth: 20, z: 30, blur: 1.2, enter: "burst", delay: 1.3, float: 10 },
+  { name: "flake-a", left: 81, top: 15, width: 20, rotate: 18, depth: 26, z: 30, enter: "burst", delay: 1.1, float: 9 },
+  { name: "flake-b", left: 5, top: 86, width: 17, rotate: -14, depth: 46, z: 30, enter: "burst", delay: 1.2, float: 7.5 },
+  { name: "flake-c", left: 15, top: 2, width: 14, rotate: -12, depth: 20, z: 30, blur: 1.2, enter: "burst", delay: 1.3, float: 10 },
 ]
 
 const IMG_SIZES = (w: number) => `(min-width: 1024px) ${Math.round(w * 0.55)}vw, ${Math.round(w * 0.95)}vw`
