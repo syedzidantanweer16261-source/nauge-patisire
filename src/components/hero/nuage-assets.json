@@ -1,1 +1,67 @@
-{}
+{
+  "croissant": {
+    "width": 1622,
+    "height": 890,
+    "widths": [
+      640,
+      1280,
+      1622
+    ]
+  },
+  "chocolate": {
+    "width": 1042,
+    "height": 1405,
+    "widths": [
+      640,
+      1042
+    ]
+  },
+  "raspberry-a": {
+    "width": 1171,
+    "height": 1132,
+    "widths": [
+      640,
+      1171
+    ]
+  },
+  "raspberry-b": {
+    "width": 1197,
+    "height": 1222,
+    "widths": [
+      640,
+      1197
+    ]
+  },
+  "raspberry-c": {
+    "width": 1065,
+    "height": 1174,
+    "widths": [
+      640,
+      1065
+    ]
+  },
+  "flake-a": {
+    "width": 1188,
+    "height": 771,
+    "widths": [
+      640,
+      1188
+    ]
+  },
+  "flake-b": {
+    "width": 1216,
+    "height": 1110,
+    "widths": [
+      640,
+      1216
+    ]
+  },
+  "flake-c": {
+    "width": 1212,
+    "height": 972,
+    "widths": [
+      640,
+      1212
+    ]
+  }
+}
