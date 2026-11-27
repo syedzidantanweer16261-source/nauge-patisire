@@ -49,6 +49,8 @@ type Layer = {
   delay: number
   float?: number
   placeholderAspect?: number
+  /** position override below lg, where the stage sits above the copy */
+  stacked?: { left: number; top: number }
 }
 
 // the point everything bursts out of: the heart of the croissant
@@ -71,13 +73,40 @@ const LAYERS: Layer[] = [
   { name: "raspberry-b", left: 80, top: 68, width: 13, rotate: 20, depth: 40, z: 30, enter: "burst", delay: 1.25, float: 8.5 },
   { name: "raspberry-c", left: 26, top: 86, width: 10, rotate: -30, depth: 58, z: 40, blur: 2.5, enter: "burst", delay: 1.35, float: 6.5 },
   { name: "flake-a", left: 81, top: 15, width: 20, rotate: 18, depth: 26, z: 30, enter: "burst", delay: 1.1, float: 9 },
-  { name: "flake-b", left: 5, top: 86, width: 17, rotate: -14, depth: 46, z: 30, enter: "burst", delay: 1.2, float: 7.5 },
+  { name: "flake-b", left: 5, top: 86, stacked: { left: -3, top: 44 }, width: 17, rotate: -14, depth: 46, z: 30, enter: "burst", delay: 1.2, float: 7.5 },
   { name: "flake-c", left: 15, top: 2, width: 14, rotate: -12, depth: 20, z: 30, blur: 1.2, enter: "burst", delay: 1.3, float: 10 },
 ]
 
 const IMG_SIZES = (w: number) => `(min-width: 1024px) ${Math.round(w * 0.55)}vw, ${Math.round(w * 0.95)}vw`
 
-function PhotoLayer({ l, px, py, reduce }: { l: Layer; px: MotionValue<number>; py: MotionValue<number>; reduce: boolean }) {
+// below lg the stage is stacked above the copy (matches the grid's lg breakpoint)
+const STACKED_MQ = "(max-width: 1023.98px)"
+function useStacked() {
+  return React.useSyncExternalStore(
+    (cb) => {
+      const mq = window.matchMedia(STACKED_MQ)
+      mq.addEventListener("change", cb)
+      return () => mq.removeEventListener("change", cb)
+    },
+    () => window.matchMedia(STACKED_MQ).matches,
+    () => false
+  )
+}
+
+function PhotoLayer({
+  l: layer,
+  stacked,
+  px,
+  py,
+  reduce,
+}: {
+  l: Layer
+  stacked: boolean
+  px: MotionValue<number>
+  py: MotionValue<number>
+  reduce: boolean
+}) {
+  const l = stacked && layer.stacked ? { ...layer, ...layer.stacked } : layer
   const x = useTransform(px, (v) => v * l.depth)
   const y = useTransform(py, (v) => v * l.depth)
 
@@ -271,6 +300,7 @@ function Letters({ text, delay }: { text: string; delay: number }) {
 
 export default function NuageHero() {
   const reduce = !!useReducedMotion()
+  const stacked = useStacked()
   const [menuOpen, setMenuOpen] = React.useState(false)
   const [burst, setBurst] = React.useState(0)
 
@@ -421,7 +451,7 @@ export default function NuageHero() {
               />
               <AmbientDust />
               {LAYERS.map((l) => (
-                <PhotoLayer key={l.name} l={l} px={px} py={py} reduce={reduce} />
+                <PhotoLayer key={l.name} l={l} stacked={stacked} px={px} py={py} reduce={reduce} />
               ))}
               {!reduce && <GoldBurst play={burst} at={burst === 0 ? 1.05 : 0} />}
             </motion.div>
